@@ -1,26 +1,27 @@
 <?php
- 
+
 $installer = $this;
- 
+
 $installer->startSetup();
- 
+
 $table = $installer->getConnection()
-    ->newTable($installer->getTable('ellis_tokens/tokens'))
+    ->newTable($installer->getTable('etokens/tokens'))
     ->addColumn('token_id', Varien_Db_Ddl_Table::TYPE_INTEGER, null, array(
         'identity'  => true,
         'unsigned'  => true,
         'nullable'  => false,
         'primary'   => true,
-        ), 'Id')
-    ->addColumn('order_id', Varien_Db_Ddl_Table::TYPE_VARCHAR, null, array(
+        ), 'Token ID')
+    ->addColumn('order_id', Varien_Db_Ddl_Table::TYPE_TIMESTAMP, null, array(
         'nullable'  => false,
-        ), 'Order')
-    ->addColumn('customer_id', Varien_Db_Ddl_Table::TYPE_TEXT, null, array(
+        ), 'Order ID')
+    ->addColumn('customer_id', Varien_Db_Ddl_Table::TYPE_TIMESTAMP, null, array(
         'nullable'  => false,
-        ), 'Customer');
-    ->addColumn('order_items', Varien_Db_Ddl_Table::TYPE_TEXT, null, array(
+        ), 'Customer ID')
+    ->addColumn('order_items', Varien_Db_Ddl_Table::TYPE_TEXT, 64, array(
         'nullable'  => false,
-        ), 'Items');
+        ), 'Order Items');
+    
 $installer->getConnection()->createTable($table);
- 
-$installer->endSetup();
+
+$installer->endSetup(); 
