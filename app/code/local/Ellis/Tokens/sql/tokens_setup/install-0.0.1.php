@@ -14,13 +14,13 @@ $table = $installer->getConnection()
         ), 'Id')
     ->addColumn('order_id', Varien_Db_Ddl_Table::TYPE_VARCHAR, null, array(
         'nullable'  => false,
-        ), 'Title')
+        ), 'Order')
     ->addColumn('customer_id', Varien_Db_Ddl_Table::TYPE_TEXT, null, array(
         'nullable'  => false,
-        ), 'Description');
+        ), 'Customer');
     ->addColumn('order_items', Varien_Db_Ddl_Table::TYPE_TEXT, null, array(
         'nullable'  => false,
-        ), 'Description');
+        ), 'Items');
 $installer->getConnection()->createTable($table);
  
 $installer->endSetup();
