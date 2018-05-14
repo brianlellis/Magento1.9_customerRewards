@@ -5,24 +5,16 @@ class Ellis_Tokens_Block_Adminhtml_Etokens_Grid extends Mage_Adminhtml_Block_Wid
     {
         parent::__construct();
         
-        $this->setId('token_grid');
+        $this->setId('etokens_grid');
         $this->setDefaultSort('token_id');
-        $this->setDefaultDir('DESC');
+        $this->setDefaultDir('ASC');
     }
     
     protected function _prepareCollection() 
     {
         $collection = Mage::getModel('etokens/etokens')->getCollection();
-        echo 'hello';
-
-        if ($collection == null) {
-            echo 'dangit';
-        } else {
-            $this->setCollection($collection);
-            return parent::_prepareCollection();     
-        }
-
-        return;
+        $this->setCollection($collection);
+        return parent::_prepareCollection();     
     }
     
     protected function _prepareColumns() 
