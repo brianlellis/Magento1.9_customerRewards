@@ -26,17 +26,13 @@
            <etokens_resource>
                 <class>Ellis_Tokens_Model_Resource</class>
                 <entities>
-                    <tokens>
+                    <etokens>
                         <table>ellis_tokens</table>
-                    </tokens>
+                    </etokens>
                 </entities>
            </etokens_resource>
-           <catalog>
-               <rewrite>
-                   <product>Ellis_Tokens_Model_Catalog_Product</product>
-               </rewrite>
-           </catalog>
         </models>
+
         <resources>
             <etokens_setup>
                 <setup>
@@ -58,6 +54,7 @@
                 </connection>
             </etokens_read>
         </resources>
+
         <events>
             <etokens_register_visit>
                 <observers>
@@ -70,6 +67,7 @@
             </etokens_register_visit>
         </events>
     </global>
+
     <admin>
         <routers>
             <adminhtml>
@@ -81,6 +79,7 @@
             </adminhtml>
         </routers>
     </admin>
+    
     <frontend>
         <routers>
             <etokens>

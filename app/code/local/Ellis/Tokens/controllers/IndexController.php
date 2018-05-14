@@ -22,7 +22,7 @@ class Ellis_Tokens_IndexController extends Mage_Core_Controller_Front_Action
     
     public function etokensAction()
     {
-        $subscription = Mage::getModel('etokens/tokens');
+        $subscription = Mage::getModel('etokens/etokens');
         
         $subscription->setFirstname('John');
         $subscription->setLastname('Doe');

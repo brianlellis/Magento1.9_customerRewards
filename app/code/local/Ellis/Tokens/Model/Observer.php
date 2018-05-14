@@ -23,7 +23,7 @@ class Ellis_Tokens_Model_Observer
     
     public function checkSubscriptions() 
     {
-        $subscription = Mage::getModel('etokens/tokens');
+        $subscription = Mage::getModel('etokens/etokens');
         
         $subscription->setFirstname('Cron');
         $subscription->setLastname('Job');

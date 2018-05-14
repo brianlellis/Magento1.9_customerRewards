@@ -12,9 +12,17 @@ class Ellis_Tokens_Block_Adminhtml_Etokens_Grid extends Mage_Adminhtml_Block_Wid
     
     protected function _prepareCollection() 
     {
-        //$collection = Mage::getModel('etokens/tokens')->getCollection();
-        //$this->setCollection($collection);
-        //return parent::_prepareCollection();
+        $collection = Mage::getModel('etokens/etokens')->getCollection();
+        echo 'hello';
+
+        if ($collection == null) {
+            echo 'dangit';
+        } else {
+            $this->setCollection($collection);
+            return parent::_prepareCollection();     
+        }
+
+        return;
     }
     
     protected function _prepareColumns() 
