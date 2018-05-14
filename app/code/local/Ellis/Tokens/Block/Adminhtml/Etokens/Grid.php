@@ -38,7 +38,7 @@ class Ellis_Tokens_Block_Adminhtml_Etokens_Grid extends Mage_Adminhtml_Block_Wid
         $this->addColumn('order_id', array (
             'index' => 'order_id',
             'header' => Mage::helper('etokens')->__('Order ID'),
-            'type'  => 'datetime',
+            'type'  => 'number',
             'sortable'  => true,
             'width' => '150px',
         ));
@@ -46,7 +46,8 @@ class Ellis_Tokens_Block_Adminhtml_Etokens_Grid extends Mage_Adminhtml_Block_Wid
         $this->addColumn('customer_id', array (
             'index' => 'customer_id',
             'header' => Mage::helper('etokens')->__('Customer ID'),
-            'sortable'  => false,
+            'type'  => 'number',
+            'sortable'  => true,
         ));
         
         $this->addColumn('order_items', array (
