@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+  <modules>
+    <Ellis_Tokens>
+      <version>0.0.1</version>
+    </Ellis_Tokens>
+  </modules>
+
+  <global>
+
+    <blocks>
+      <tokens>
+        <class>Ellis_Tokens_Block</class>
+      </tokens>
+    </blocks>
+
+    <helpers>
+      <tokens>
+        <class>Ellis_Tokens_Helper</class>
+      </tokens>
+    </helpers>
+
+    <models>
+
+      <tokens>
+        <class>Ellis_Tokens_Model</class>
+        <resourceModel>tokens_resource</resourceModel>
+      </tokens>
+
+      <tokens_resource>
+      	<class>Ellis_Tokens_Model_Resource</class>
+        <entities>
+            <ellis_tokens>
+                <table>ellis_tokens</table>
+            </ellis_tokens>
+        </entities>
+      </tokens_resource>
+      
+    </models>
+
+    <resources>
+        <tokens_setup>
+            <setup>
+                <module>Ellis_Tokens</module>
+            </setup>
+        </tokens_setup>
+    </resources>
+
+  </global>
+</config>
