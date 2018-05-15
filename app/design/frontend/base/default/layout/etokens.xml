@@ -1,25 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <layout>
-
-<!--
-Default layout, loads most of the pages
--->
-
     <default>
         <reference name="right">
             <block type="etokens/sidebar" name="right.etokens" template="etokens/sidebar.phtml" />
         </reference>
 
     </default>
-
-<!--
-Customer account home dashboard layout
--->
-
-    <customer_account_index>
-        <reference name="right">
-            <action method="unsetChild"><name>right.etokens</name></action>
-        </reference>
-    </customer_account_index>
-
 </layout>
