@@ -56,15 +56,19 @@
         </resources>
 
         <events>
-            <etokens_register_visit>
-                <observers>
-                    <register_visit>
-                        <type>singleton</type>
-                        <class>etokens/observer</class>
-                        <method>registerVisit</method>
-                    </register_visit>
-                </observers>
-            </etokens_register_visit>
+            <!-- 
+                This event is called every time the order is saved. 
+                For eg. Order status changed, invoiced, shipped & credit memo.
+            -->
+            <sales_order_save_after>    
+                <observers>                
+                    <etokens_observer>                    
+                        <type>singleton</type>                        
+                        <class>Ellis_Tokens_Model_Observer</class>                        
+                        <method>tokenOrderSaveAfter</method>                  
+                    </etokens_observer>                
+                </observers>            
+            </sales_order_save_after>
         </events>
     </global>
 
@@ -121,21 +125,5 @@
                 </Ellis_Tokens>
             </modules>
         </translate>
-
-        <events>
-            <!-- 
-                This event is called every time the order is saved. 
-                For eg. Order status changed, invoiced, shipped & credit memo.
-            -->
-            <sales_order_save_after>    
-                <observers>                
-                    <etokens_observer>                    
-                        <type>singleton</type>                        
-                        <class>Ellis_Tokens_Model_Observer</class>                        
-                        <method>tokenOrderSaveAfter</method>                  
-                    </etokens_observer>                
-                </observers>            
-            </sales_order_save_after>
-        </events>
     </frontend>
 </config>

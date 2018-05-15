@@ -2,31 +2,29 @@
 class Ellis_Tokens_Model_Observer 
 {
     public function tokenOrderSaveAfter(Varien_Event_Observer $observer) {
-        $order = $observer->getEvent()->getOrder();
-        
+        $order = $observer->getOrder();
 
-        /*
-         * Ensure order has been saved first
-         */
-        if ($order->getState() == Mage_Sales_Model_Order::STATE_COMPLETE) {
+        // check if order has finished checkout state
+        if( $order->getStatus() == "pending" ) {
+
             $orderId = $order->getId();
             $customerId = $order->getCustomerId();
             
             $items=array();
             foreach ($order->getAllItems() as $item) {
+                array_push($items, $item->getName());
+
+                /*
+                 * Intentionally left for easy expansion reference for future use
+                
                 $items[] = array(
                     'name'          => $item->getName(),
-
-                    /*
-                     * Intentionally left for easy expansion reference for future use
-
                     'id'            => $order->getIncrementId(),
                     'sku'           => $item->getSku(),
                     'Price'         => $item->getPrice(),
                     'Ordered Qty'   => $item->getQtyOrdered(),
-
-                    */
                 );
+                */
             }
             $items = implode(",",$items);
 
@@ -40,9 +38,11 @@ class Ellis_Tokens_Model_Observer
 
                 $tokenInfo->save();
 
-
-                Mage::log('Token for ' . $orderId . 'has been added to ellis_tokens table', null, 'etokens.log');
+                $customerId == 0 ? $logStr = $orderId . '(Unregistered Customer)' : $logStr = $orderId;
+                Mage::log('Token for order #' . $logStr . ' has been added to ellis_tokens table', null, 'etokens.log');
+            
             } catch (Exception $e) {
+                Mage::log('Token for Order #' . $orderId . ' failed to save', null, 'etokens.log');
                 Mage::logException($e);
             }
         }
