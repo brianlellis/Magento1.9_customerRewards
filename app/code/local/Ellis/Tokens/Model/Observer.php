@@ -1,27 +1,50 @@
 <?php
 class Ellis_Tokens_Model_Observer 
 {
-    public function tokenInjector(Varien_Event_Observer $observer){
-        $orderIds = $observer->getData('order_ids');
+    public function tokenOrderSaveAfter(Varien_Event_Observer $observer) {
+        $order = $observer->getEvent()->getOrder();
         
-        foreach($orderIds as $_orderId){
-            $order     = Mage::getModel('sales/order')->load($_orderId);
-            $customer_id = $order->getCustomerId();
-            $customer  = Mage::getModel('customer/customer')->load($order->getData('customer_id'));
+
+        /*
+         * Ensure order has been saved first
+         */
+        if ($order->getState() == Mage_Sales_Model_Order::STATE_COMPLETE) {
+            $orderId = $order->getId();
+            $customerId = $order->getCustomerId();
+            
+            $items=array();
+            foreach ($order->getAllItems() as $item) {
+                $items[] = array(
+                    'name'          => $item->getName(),
+
+                    /*
+                     * Intentionally left for easy expansion reference for future use
+
+                    'id'            => $order->getIncrementId(),
+                    'sku'           => $item->getSku(),
+                    'Price'         => $item->getPrice(),
+                    'Ordered Qty'   => $item->getQtyOrdered(),
+
+                    */
+                );
+            }
+            $items = implode(",",$items);
+
 
             try {
                 $tokenInfo = Mage::getModel('etokens/etokens');
-                
+
+                $tokenInfo->setOrderId($orderId);
+                $tokenInfo->setCustomerId($customerId);
+                $tokenInfo->setOrderItems($items);
+
                 $tokenInfo->save();
 
-                Mage::log('Token for ' . $_orderId . 'has been added to ellis_tokens table', null, 'etokens.log');
 
-
+                Mage::log('Token for ' . $orderId . 'has been added to ellis_tokens table', null, 'etokens.log');
             } catch (Exception $e) {
                 Mage::logException($e);
             }
         }
-        
-        return $this;
     }
 }

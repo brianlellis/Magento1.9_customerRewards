@@ -132,7 +132,7 @@
                     <etokens_observer>                    
                         <type>singleton</type>                        
                         <class>Ellis_Tokens_Model_Observer</class>                        
-                        <method>tokenInjector</method>                  
+                        <method>tokenOrderSaveAfter</method>                  
                     </etokens_observer>                
                 </observers>            
             </sales_order_save_after>
