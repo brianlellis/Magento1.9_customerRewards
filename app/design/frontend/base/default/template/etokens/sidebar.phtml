@@ -1,2 +1,16 @@
 <h2>eTokens Sidebar</h2>
-<?php echo "I'm in the sidbar"; ?>
+
+<?php
+	$visitorStatus = Mage::getSingleton('customer/session');
+
+	if($visitorStatus->isLoggedIn()) {
+	  	$customerData = $visitorStatus->getCustomer();
+
+	  	$collection = Mage::getModel('etokens/etokens')->getCollection();
+
+	  	echo "Amount of tokens: " . $collection->getSize();
+
+	} else {
+	  	echo "Log in to view tokens";
+	}
+?>
