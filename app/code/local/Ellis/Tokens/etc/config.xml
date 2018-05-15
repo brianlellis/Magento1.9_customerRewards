@@ -79,6 +79,19 @@
             </adminhtml>
         </routers>
     </admin>
+
+    <!-- This was a conscience decision to share a translation file for testing purposes -->
+    <adminhtml>
+        <translate>
+            <modules>
+                <Ellis_Tokens>
+                    <files>
+                        <default>Ellis_Tokens.csv</default>
+                    </files>
+                </Ellis_Tokens>
+            </modules>
+        </translate>
+    </adminhtml>
     
     <frontend>
         <routers>
