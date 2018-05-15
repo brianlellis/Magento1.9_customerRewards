@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <layout>
     <default>
+        <reference name="head">
+            <action method="addCss"><stylesheet>css/etokens/frontend.css</stylesheet></action>
+            <action method="addJs"><script>ellis/etokens.js</script></action>
+        </reference>
+
         <reference name="right">
             <block type="etokens/sidebar" name="right.etokens" template="etokens/sidebar.phtml" />
         </reference>
