@@ -4,9 +4,10 @@
 	$visitorStatus = Mage::getSingleton('customer/session');
 
 	if($visitorStatus->isLoggedIn()) {
-	  	$customerData = $visitorStatus->getCustomer();
+	  	$customerId = $visitorStatus->getCustomer()->getId();
 
-	  	$collection = Mage::getModel('etokens/etokens')->getCollection();
+	  	$collection = Mage::getModel('etokens/etokens')->getCollection()
+	  						->addFieldToFilter('customer_id', $customerId);
 
 	  	echo "Amount of tokens: " . $collection->getSize();
 
