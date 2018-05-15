@@ -4,7 +4,12 @@ class Ellis_Tokens_Model_Observer
     public function tokenOrderSaveAfter(Varien_Event_Observer $observer) {
         $order = $observer->getOrder();
 
-        // check if order has finished checkout state
+        /* 
+         * Check if order has finished comple state
+         *
+         * If Complete state was intended consider but using pending will allow even COD and other cash methods
+         * ($order->getState() == Mage_Sales_Model_Order::STATE_COMPLETE) || ($order->getStatus() == "complete")
+         */
         if( $order->getStatus() == "pending" ) {
 
             $orderId = $order->getId();
