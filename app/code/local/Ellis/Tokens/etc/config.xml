@@ -90,6 +90,7 @@
                 </args>
             </etokens>
         </routers>
+
         <layout>
             <updates>
                 <etokens>
@@ -97,6 +98,7 @@
                 </etokens>
             </updates>
         </layout>
+
         <translate>
             <modules>
                 <Ellis_Tokens>
@@ -106,5 +108,21 @@
                 </Ellis_Tokens>
             </modules>
         </translate>
+
+        <events>
+            <!-- 
+                This event is called every time the order is saved. 
+                For eg. Order status changed, invoiced, shipped & credit memo.
+            -->
+            <sales_order_save_after>    
+                <observers>                
+                    <etokens_observer>                    
+                        <type>singleton</type>                        
+                        <class>Ellis_Tokens_Model_Observer</class>                        
+                        <method>tokenInjector</method>                  
+                    </etokens_observer>                
+                </observers>            
+            </sales_order_save_after>
+        </events>
     </frontend>
 </config>

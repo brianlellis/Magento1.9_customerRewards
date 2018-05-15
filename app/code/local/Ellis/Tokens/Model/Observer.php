@@ -1,35 +1,27 @@
 <?php
 class Ellis_Tokens_Model_Observer 
 {
-    public function registerVisit ($observer)
-    {
-        $product = $observer->getProduct();
-        $category = $observer->getCategory();
+    public function tokenInjector(Varien_Event_Observer $observer){
+        $orderIds = $observer->getData('order_ids');
         
-        Mage::log($product->debug());
-        Mage::log($category->debug());
-    }
-    
-    public function checkCartQty ($observer)
-    {
-        if ($observer->getProduct()->getQty() % 2 == 0) {
-            //Even
-            Mage::getSingleton('checkout/session')->addNotice('Even quantity added');
-        } else {
-            //Odd
-            Mage::throwException('Quantity is odd. It needs to be even');
+        foreach($orderIds as $_orderId){
+            $order     = Mage::getModel('sales/order')->load($_orderId);
+            $customer_id = $order->getCustomerId();
+            $customer  = Mage::getModel('customer/customer')->load($order->getData('customer_id'));
+
+            try {
+                $tokenInfo = Mage::getModel('etokens/etokens');
+                
+                $tokenInfo->save();
+
+                Mage::log('Token for ' . $_orderId . 'has been added to ellis_tokens table', null, 'etokens.log');
+
+
+            } catch (Exception $e) {
+                Mage::logException($e);
+            }
         }
-    }
-    
-    public function checkSubscriptions() 
-    {
-        $subscription = Mage::getModel('etokens/etokens');
         
-        $subscription->setFirstname('Cron');
-        $subscription->setLastname('Job');
-        $subscription->setEmail('cron.job@example.com');
-        $subscription->setMessage('Created by cronjob');
-        
-        $subscription->save();
+        return $this;
     }
 }
