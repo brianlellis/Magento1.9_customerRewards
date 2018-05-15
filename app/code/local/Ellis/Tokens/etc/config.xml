@@ -31,6 +31,13 @@
                     </etokens>
                 </entities>
            </etokens_resource>
+
+          <!-- Rewriting models -->
+          <customer>
+              <rewrite>
+                  <customer>Ellis_Tokens_Model_Customer</customer>
+              </rewrite>
+          </customer>
         </models>
 
         <resources>
