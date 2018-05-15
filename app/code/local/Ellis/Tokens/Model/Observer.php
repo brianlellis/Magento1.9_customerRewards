@@ -5,7 +5,7 @@ class Ellis_Tokens_Model_Observer
         $order = $observer->getOrder();
 
         /* 
-         * Check if order has finished comple state
+         * Check if order has finished been
          *
          * If Complete state was intended consider but using pending will allow even COD and other cash methods
          * ($order->getState() == Mage_Sales_Model_Order::STATE_COMPLETE) || ($order->getStatus() == "complete")
